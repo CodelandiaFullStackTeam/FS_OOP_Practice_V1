@@ -1,0 +1,49 @@
+﻿
+  Tapşırıq V1
+
+Hal-hazırda mövcud sistemdə məhsulları çeşitləmək üçün kateqoriyalar cədvəlinə ehtiyac var və hər bir məhsul hər hansısa bir kateqoriyaya aid olmalıdır.
+Sizdən istəyimiz kateqoriya cədvəli yaradıb bu cədvəli sistemə inteqrasiya etməkdir.
+Kateqoriya cədvəli iyerarxik struktura malik olub öz arasında əlaqəli olmalıdır.Belə ki,hər bir kateqoriya hər hansısa bir üst kateqoriyaya malik ola bilər.
+Kateqoriya cədvəli üçün sütunlar:
+1.ID (int tipində)
+2.Ad  string
+3.İlk daxiledilmə tarixi (date tipində)
+4.Son Düzəliş tarixi (date tipində)
+5.Üst kateqoriya (nəzərə alın ki üst kateqoriya olmayada bilər)
+6.Uşaqların sayı(int tipində) (Hər bir kateqoriya üçün əgər atadırsa onun uşaqlarının sayı qeyd olunacaq)
+7.Ətraflı qeyd hissəsi(Description) (string tipində)
+8.Aktiv/Deaktiv (0 və 1 ilə saxlanılsın 0-deaktiv 1-aktiv)
+9.Deleted(int tipində) (Sistemdə fiziki silinmə olmadığına görə,sətirlər məntiqi silinir.Əgər sətir silinirsə silinən sətirin id-si deleted sütununa yazılır)
+
+Kateqoriya cədvəli üçün sütun məhdudlaşdırmaları:
+1.ID sütunu avtomatik artan olmalıdır və təkrarlanmamalıdır.
+2.Ad sütununa 3 simvoldan az və 50 simvoldan artıq ad daxil edilməməlidir.
+3.Description sütunu minimum 10, maksimum 500 simvol qədər yer tutmalıdır
+4.Aktiv/Deaktiv sütununun susmaya görə dəyəri 0 olmalıdır.
+5.Deleted sütununun susmaya görə dəyəri 0 olmalıdır.
+
+Kateqoriya cədvəli üçün biznes yoxlamaları:
+
+1.Yeni kateqoriya daxil edərkən öncədən sistemdə bu adda kateqoriyanın mövcudluğu yoxlanılmalıdır.
+  Əgər varsa istifadəçiyə “Bu adda kateqoriya artıq mövcuddur” xəta mesajı göstərilməlidir.
+  Bu yoxlamada silinmə şərti nəzərə alınmalıdır.
+  Əgər daxil edilən kateqoriya öncədən mövcud olubsa və silinibsə bu halda daxil etməyə icazə verilməlidir.
+
+2.Əlavə olunan kateqoriyada üst kateqoriya mövcuddursa bu üst kateqoriyanın silinməmiş və aktiv olma şərti yoxlanmalıdır.
+  Əgər şərtlərdən hər hansısa biri ödənmədikdə həmin şərtə əsasən xəta mesajı ekrana verilməlidir.
+
+3. Əlavə olunan kateqoriyada üst kateqoriya mövcuddursa və bu üst kateqoriya öncəki yoxlamalardan keçibsə artıq 
+   yeni bir uşağı yarandığı üçün onun Uşaqların sayı dəyəri bir vahid artırılmalıdır.
+
+4.Kateqoriya silinən zaman onun üst kateqoriyası mövcuddursa bu üst kateqoriyanın uşaqların sayı dəyəri 1 vahid 
+  azaldılmalıdır.
+5.Kateqoriya yenilənən zaman onun üst kateqoriyası mövcuddursa və üst kateqoriyada yenilənibsə bu halda köhnə 
+  üst kateqoriyanın uşaqların sayı dəyəri 1 vahid azaldılmalı yenidə isə 1 vahid artırılmalıdır.
+
+6.Əgər hər hansısa bir kateqoriya deaktiv edilirsə onun bütün uşaqları da deaktiv edilməlidir.
+  Eynisi bu halın əksi üçün də yazılmalıdır.
+
+7.Sistemin biznes qaydalarına əsasən bir kateqoriyanın 10 dan çox uşağı ola bilməz.
+  Bu hal həm daxiletmə həm də yeniləmə zamanı nəzərə alınmalıdır.
+
+8.İstifadəçilərə yalnız silinməmiş məlumatlar göstərilməlidir.
